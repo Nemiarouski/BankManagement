@@ -1,6 +1,7 @@
 package com.intexsoft.project.entities;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Account {
     private CurrencyType currencyType;
@@ -35,5 +36,18 @@ public class Account {
 
     public void setTransactionHistory(List<String> transactionHistory) {
         this.transactionHistory = transactionHistory;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Account account = (Account) o;
+        return Double.compare(account.cash, cash) == 0 && currencyType == account.currencyType && Objects.equals(transactionHistory, account.transactionHistory);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(currencyType, cash, transactionHistory);
     }
 }
