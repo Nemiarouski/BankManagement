@@ -12,29 +12,25 @@ public abstract class AbstractRepository <T> {
 
     protected abstract String filepath();
 
-    public void createBank() {
-        //create new entity;
-    }
-
-    public void add(T t) {
-        entities.add(t);
-    }
-
-    public void delete(T t) {
+    public void deleteEntity(T t) {
         entities.remove(t);
     }
 
-    public List<T> getT() {
+    public List<T> getEntities() {
         return entities;
     }
 
-    public void save() throws IOException {
+    public void addEntity(T t) {
+        entities.add(t);
+    }
+
+    public void saveEntities() throws IOException {
         File file = new File(filepath());
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.writeValue(file, entities);
     }
 
-    public void download() throws IOException {
+    public void downloadEntities() throws IOException {
         File file = new File(filepath());
         if (file.exists() && file.length() > 0) {
             ObjectMapper objectMapper = new ObjectMapper();

@@ -8,4 +8,6 @@ public class BankRepository extends AbstractRepository<Bank> {
     protected String filepath() {
         return "banks.json";
     }
+
+
 }

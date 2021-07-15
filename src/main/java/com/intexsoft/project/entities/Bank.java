@@ -37,4 +37,14 @@ public class Bank {
     public void setDatabase(Map<Account, Client> database) {
         this.database = database;
     }
+
+    @Override
+    public String toString() {
+        return  "[Bank Name]: "
+                + bankName
+                + " [Rate]: "
+                + rate
+                + " [Database]: "
+                + database;
+    }
 }

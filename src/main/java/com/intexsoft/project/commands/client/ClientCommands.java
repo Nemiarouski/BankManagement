@@ -15,9 +15,11 @@ public class ClientCommands implements Command {
         clientCommands = List.of(
                 new CreateClientCommand(consoleHelper, clientService),
                 new DeleteClientCommand(consoleHelper, clientService),
+                new UpdateClientCommand(consoleHelper, clientService),
+                new ShowClientsCommand(clientService),
                 new DownloadClientCommand(consoleHelper, clientService),
-                new SaveClientCommand(consoleHelper, clientService),
-                new UpdateClientCommand(consoleHelper, clientService));
+                new SaveClientCommand(consoleHelper, clientService)
+        );
     }
 
     @Override

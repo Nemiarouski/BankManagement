@@ -54,4 +54,14 @@ public class Client {
     public int hashCode() {
         return Objects.hash(name, clientType, accounts);
     }
+
+    @Override
+    public String toString() {
+        return "[Client Name]: "
+                + name
+                + " [Client Type]: "
+                + clientType
+                + " [Accounts]: "
+                + accounts;
+    }
 }

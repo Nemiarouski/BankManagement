@@ -50,4 +50,15 @@ public class Account {
     public int hashCode() {
         return Objects.hash(currencyType, cash, transactionHistory);
     }
+
+    @Override
+    public String toString() {
+        return "[Account]: "
+                + " [Currency Type]: "
+                + currencyType
+                + "[Cash]: "
+                + cash
+                + " [Transaction History]: "
+                + transactionHistory;
+    }
 }

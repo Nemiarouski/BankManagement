@@ -6,7 +6,11 @@ public class ConsoleHelper {
     private final Scanner scanner = new Scanner(System.in);
 
     public String read() {
-        return scanner.nextLine();
+        String name;
+        do {
+            name = scanner.nextLine();
+        } while (name.length() <= 0);
+        return name;
     }
 
     public int validateIntToValue(int value) {
