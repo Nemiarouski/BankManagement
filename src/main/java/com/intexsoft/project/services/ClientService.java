@@ -26,8 +26,8 @@ public class ClientService {
 
     }
 
-    public void deleteClient() {
-
+    public void deleteClient(Client client) {
+        clientRepository.deleteEntity(client);
     }
 
     public List<Client> getClients() {
