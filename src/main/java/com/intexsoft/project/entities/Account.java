@@ -8,7 +8,6 @@ public class Account {
     private List<String> transactionHistory;
 
     public Account() {}
-
     public Account(CurrencyType currencyType) {
         this.currencyType = currencyType;
         this.cash = 0;
