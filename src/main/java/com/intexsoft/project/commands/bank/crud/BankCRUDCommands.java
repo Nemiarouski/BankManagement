@@ -1,15 +1,15 @@
-package com.intexsoft.project.commands.bank;
+package com.intexsoft.project.commands.bank.crud;
 
 import com.intexsoft.project.commands.Command;
 import com.intexsoft.project.services.BankService;
 import com.intexsoft.project.utils.ConsoleHelper;
 import java.util.List;
 
-public class BankCommands implements Command {
+public class BankCRUDCommands implements Command {
     private final ConsoleHelper consoleHelper;
     private final List<Command> bankCommands;
 
-    public BankCommands(ConsoleHelper consoleHelper, BankService bankService) {
+    public BankCRUDCommands(ConsoleHelper consoleHelper, BankService bankService) {
         this.consoleHelper = consoleHelper;
         bankCommands = List.of(
                 new CreateBankCommand(consoleHelper, bankService),

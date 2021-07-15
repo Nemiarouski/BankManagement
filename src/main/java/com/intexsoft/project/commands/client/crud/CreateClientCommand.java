@@ -1,4 +1,4 @@
-package com.intexsoft.project.commands.client;
+package com.intexsoft.project.commands.client.crud;
 
 import com.intexsoft.project.commands.Command;
 import com.intexsoft.project.entities.ClientType;
