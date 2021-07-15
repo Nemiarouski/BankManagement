@@ -2,18 +2,21 @@ package com.intexsoft.project.commands.bank;
 
 import com.intexsoft.project.commands.Command;
 import com.intexsoft.project.services.BankService;
+import com.intexsoft.project.utils.ConsoleHelper;
 import java.util.List;
 
 public class BankCommands implements Command {
-    private List<Command> bankCommands;
+    private final ConsoleHelper consoleHelper;
+    private final List<Command> bankCommands;
 
-    public BankCommands(BankService bankService) {
+    public BankCommands(ConsoleHelper consoleHelper, BankService bankService) {
+        this.consoleHelper = consoleHelper;
         bankCommands = List.of(
-                new CreateBankCommand(bankService),
-                new DeleteBankCommand(bankService),
-                new DownloadBankCommand(bankService),
-                new SaveBankCommand(bankService),
-                new UpdateBankCommand(bankService));
+                new CreateBankCommand(consoleHelper, bankService),
+                new DeleteBankCommand(consoleHelper, bankService),
+                new DownloadBankCommand(consoleHelper, bankService),
+                new SaveBankCommand(consoleHelper, bankService),
+                new UpdateBankCommand(consoleHelper, bankService));
     }
 
     @Override
@@ -23,6 +26,10 @@ public class BankCommands implements Command {
 
     @Override
     public void execute() {
-
+        for (int i = 0; i < bankCommands.size(); i++) {
+            System.out.println((i + 1) + ") " + bankCommands.get(i).name());
+        }
+        int choice = consoleHelper.validateIntToValue(bankCommands.size());
+        bankCommands.get(choice - 1).execute();
     }
 }

@@ -9,7 +9,6 @@ public class Client {
     private List<Account> accounts;
 
     public Client() {}
-
     public Client(String name, ClientType clientType) {
         this.name = name;
         this.clientType = clientType;

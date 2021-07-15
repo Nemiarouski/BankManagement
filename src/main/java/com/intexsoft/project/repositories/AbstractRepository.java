@@ -13,7 +13,7 @@ public abstract class AbstractRepository <T> {
     protected abstract String filepath();
 
     public void createBank() {
-        //create new Bank();
+        //create new entity;
     }
 
     public void add(T t) {

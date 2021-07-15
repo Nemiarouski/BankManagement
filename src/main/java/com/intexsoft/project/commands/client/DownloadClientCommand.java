@@ -2,11 +2,14 @@ package com.intexsoft.project.commands.client;
 
 import com.intexsoft.project.commands.Command;
 import com.intexsoft.project.services.ClientService;
+import com.intexsoft.project.utils.ConsoleHelper;
 
 public class DownloadClientCommand implements Command {
+    private final ConsoleHelper consoleHelper;
     private final ClientService clientService;
 
-    public DownloadClientCommand(ClientService clientService) {
+    public DownloadClientCommand(ConsoleHelper consoleHelper, ClientService clientService) {
+        this.consoleHelper = consoleHelper;
         this.clientService = clientService;
     }
 

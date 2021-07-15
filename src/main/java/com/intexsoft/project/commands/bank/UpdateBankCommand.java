@@ -2,11 +2,14 @@ package com.intexsoft.project.commands.bank;
 
 import com.intexsoft.project.commands.Command;
 import com.intexsoft.project.services.BankService;
+import com.intexsoft.project.utils.ConsoleHelper;
 
 public class UpdateBankCommand implements Command {
+    private final ConsoleHelper consoleHelper;
     private final BankService bankService;
 
-    public UpdateBankCommand(BankService bankService) {
+    public UpdateBankCommand(ConsoleHelper consoleHelper, BankService bankService) {
+        this.consoleHelper = consoleHelper;
         this.bankService = bankService;
     }
 
