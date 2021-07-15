@@ -2,14 +2,11 @@ package com.intexsoft.project.commands.client.crud;
 
 import com.intexsoft.project.commands.Command;
 import com.intexsoft.project.services.ClientService;
-import com.intexsoft.project.utils.ConsoleHelper;
 
 public class DownloadClientCommand implements Command {
-    private final ConsoleHelper consoleHelper;
     private final ClientService clientService;
 
-    public DownloadClientCommand(ConsoleHelper consoleHelper, ClientService clientService) {
-        this.consoleHelper = consoleHelper;
+    public DownloadClientCommand(ClientService clientService) {
         this.clientService = clientService;
     }
 
@@ -20,6 +17,6 @@ public class DownloadClientCommand implements Command {
 
     @Override
     public void execute() {
-
+        clientService.download();
     }
 }

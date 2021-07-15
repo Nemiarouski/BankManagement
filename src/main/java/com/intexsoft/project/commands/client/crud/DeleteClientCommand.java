@@ -4,7 +4,6 @@ import com.intexsoft.project.commands.Command;
 import com.intexsoft.project.entities.Client;
 import com.intexsoft.project.services.ClientService;
 import com.intexsoft.project.utils.ConsoleHelper;
-
 import java.util.List;
 
 public class DeleteClientCommand implements Command {
@@ -14,6 +13,17 @@ public class DeleteClientCommand implements Command {
     public DeleteClientCommand(ConsoleHelper consoleHelper, ClientService clientService) {
         this.consoleHelper = consoleHelper;
         this.clientService = clientService;
+    }
+
+    private Client getClientToDelete(List<Client> clients) {
+        int choice = consoleHelper.validateIntToValue(clients.size());
+        return clients.get(choice - 1);
+    }
+
+    private void showClient(List<Client> clients) {
+        for (int i = 0; i < clients.size(); i++) {
+            System.out.println((i + 1) + ") " + clients.get(i).toString());
+        }
     }
 
     @Override
@@ -30,16 +40,5 @@ public class DeleteClientCommand implements Command {
         Client client = getClientToDelete(clients);
 
         clientService.deleteClient(client);
-    }
-
-    private Client getClientToDelete(List<Client> clients) {
-        int choice = consoleHelper.validateIntToValue(clients.size());
-        return clients.get(choice - 1);
-    }
-
-    private void showClient(List<Client> clients) {
-        for (int i = 0; i < clients.size(); i++) {
-            System.out.println((i + 1) + ") " + clients.get(i).toString());
-        }
     }
 }

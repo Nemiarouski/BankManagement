@@ -20,8 +20,8 @@ public class ShowClientsCommand implements Command {
     @Override
     public void execute() {
         List<Client> clients = clientService.getClients();
-        for (Client client : clients) {
-            System.out.println(client.toString());
+        for (int i = 0; i < clients.size(); i++) {
+            System.out.println((i + 1) + ") " + clients.get(i));
         }
     }
 }

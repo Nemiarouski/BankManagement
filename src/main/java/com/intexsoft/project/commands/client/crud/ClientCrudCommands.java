@@ -3,28 +3,26 @@ package com.intexsoft.project.commands.client.crud;
 import com.intexsoft.project.commands.Command;
 import com.intexsoft.project.services.ClientService;
 import com.intexsoft.project.utils.ConsoleHelper;
-
 import java.util.List;
 
-public class ClientCRUDCommands implements Command {
-    private final List<Command> clientCommands;
+public class ClientCrudCommands implements Command {
     private final ConsoleHelper consoleHelper;
+    private final List<Command> clientCommands;
 
-    public ClientCRUDCommands(ConsoleHelper consoleHelper, ClientService clientService) {
+    public ClientCrudCommands(ConsoleHelper consoleHelper, ClientService clientService) {
         this.consoleHelper = consoleHelper;
         clientCommands = List.of(
                 new CreateClientCommand(consoleHelper, clientService),
                 new DeleteClientCommand(consoleHelper, clientService),
                 new UpdateClientCommand(consoleHelper, clientService),
                 new ShowClientsCommand(clientService),
-                new DownloadClientCommand(consoleHelper, clientService),
-                new SaveClientCommand(consoleHelper, clientService)
-        );
+                new SaveClientCommand(clientService),
+                new DownloadClientCommand(clientService));
     }
 
     @Override
     public String name() {
-        return "Client Menu";
+        return "Client Crud Menu";
     }
 
     @Override
