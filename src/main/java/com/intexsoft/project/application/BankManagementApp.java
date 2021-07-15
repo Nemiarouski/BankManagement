@@ -1,6 +1,6 @@
 package com.intexsoft.project.application;
 
-public class BankManagmentApp {
+public class BankManagementApp {
     public static void main(String[] args) {
 
     }
