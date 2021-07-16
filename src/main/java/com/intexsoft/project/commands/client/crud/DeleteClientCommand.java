@@ -20,12 +20,6 @@ public class DeleteClientCommand implements Command {
         return clients.get(choice - 1);
     }
 
-    private void showClient(List<Client> clients) {
-        for (int i = 0; i < clients.size(); i++) {
-            System.out.println((i + 1) + ") " + clients.get(i).toString());
-        }
-    }
-
     @Override
     public String name() {
         return "Delete Client";
@@ -34,7 +28,7 @@ public class DeleteClientCommand implements Command {
     @Override
     public void execute() {
         List<Client> clients = clientService.getEntities();
-        showClient(clients);
+        consoleHelper.show(clients);
 
         System.out.println("Input client to delete:");
         Client client = getClientToDelete(clients);

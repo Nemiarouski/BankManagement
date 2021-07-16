@@ -1,12 +1,13 @@
 package com.intexsoft.project.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class Client {
     private String name;
     private ClientType clientType;
-    private List<Account> accounts;
+    private List<Account> accounts = new ArrayList<>();
 
     public Client() {}
     public Client(String name, ClientType clientType) {
@@ -57,11 +58,9 @@ public class Client {
 
     @Override
     public String toString() {
-        return "[Client Name]: "
-                + name
-                + " [Client Type]: "
-                + clientType
-                + " [Accounts]: "
-                + accounts;
+        return "Client{" +
+                "name='" + name + '\'' +
+                ", clientType=" + clientType +
+                '}';
     }
 }

@@ -2,8 +2,10 @@ package com.intexsoft.project.application;
 
 import com.intexsoft.project.commands.Command;
 import com.intexsoft.project.commands.ExitCommand;
-import com.intexsoft.project.commands.bank.crud.BankCrudCommands;
+import com.intexsoft.project.commands.bank.BankCrudCommands;
+import com.intexsoft.project.commands.client.menu.AddClientToBankCommand;
 import com.intexsoft.project.commands.client.crud.ClientCrudCommands;
+import com.intexsoft.project.commands.client.menu.ClientAccountsCommand;
 import com.intexsoft.project.manager.Manager;
 import com.intexsoft.project.repositories.BankRepository;
 import com.intexsoft.project.repositories.ClientRepository;
@@ -36,6 +38,8 @@ public class Menu {
     private void fillMenuCommands() {
         addCommand(menuCommands, new BankCrudCommands(consoleHelper, bankService));
         addCommand(menuCommands, new ClientCrudCommands(consoleHelper, clientService));
+        addCommand(menuCommands, new AddClientToBankCommand(bankService, clientService, consoleHelper));
+        addCommand(menuCommands, new ClientAccountsCommand(consoleHelper, clientService));
         addCommand(menuCommands, new ExitCommand());
     }
 

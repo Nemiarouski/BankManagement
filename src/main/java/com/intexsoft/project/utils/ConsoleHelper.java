@@ -1,5 +1,6 @@
 package com.intexsoft.project.utils;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class ConsoleHelper {
@@ -51,5 +52,11 @@ public class ConsoleHelper {
             inputNumber = scanner.nextDouble();
         } while (inputNumber <= 0);
         return inputNumber;
+    }
+
+    public  <T> void show(List<T> t) {
+        for (int i = 0; i < t.size(); i++) {
+            System.out.println((i + 1) + ") " + t.get(i));
+        }
     }
 }

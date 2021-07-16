@@ -1,17 +1,29 @@
 package com.intexsoft.project.entities;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class Account {
+    private String bankName;
     private CurrencyType currencyType;
-    private double cash;
-    private List<String> transactionHistory;
+    private BigDecimal cash;
+    private List<Transaction> transactionHistory = new ArrayList<>();
 
     public Account() {}
-    public Account(CurrencyType currencyType) {
+    public Account(String bankName, CurrencyType currencyType) {
+        this.bankName = bankName;
         this.currencyType = currencyType;
-        this.cash = 0;
+        this.cash = BigDecimal.valueOf(0);
+    }
+
+    public String getBankName() {
+        return bankName;
+    }
+
+    public void setBankName(String bankName) {
+        this.bankName = bankName;
     }
 
     public CurrencyType getCurrencyType() {
@@ -22,20 +34,24 @@ public class Account {
         this.currencyType = currencyType;
     }
 
-    public double getCash() {
+    public BigDecimal getCash() {
         return cash;
     }
 
-    public void setCash(double cash) {
+    public void setCash(BigDecimal cash) {
         this.cash = cash;
     }
 
-    public List<String> getTransactionHistory() {
+    public List<Transaction> getTransactionHistory() {
         return transactionHistory;
     }
 
-    public void setTransactionHistory(List<String> transactionHistory) {
+    public void setTransactionHistory(List<Transaction> transactionHistory) {
         this.transactionHistory = transactionHistory;
+    }
+
+    public void addTransaction(Transaction transaction) {
+        transactionHistory.add(transaction);
     }
 
     @Override
@@ -43,20 +59,20 @@ public class Account {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Account account = (Account) o;
-        return Double.compare(account.cash, cash) == 0 && currencyType == account.currencyType && Objects.equals(transactionHistory, account.transactionHistory);
+        return Objects.equals(bankName, account.bankName) && currencyType == account.currencyType && Objects.equals(cash, account.cash) && Objects.equals(transactionHistory, account.transactionHistory);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(currencyType, cash, transactionHistory);
+        return Objects.hash(bankName, currencyType, cash, transactionHistory);
     }
 
     @Override
     public String toString() {
-        return "[Account]: "
+        return "[" + bankName + "]:"
                 + " [Currency Type]: "
                 + currencyType
-                + "[Cash]: "
+                + " [Cash]: "
                 + cash
                 + " [Transaction History]: "
                 + transactionHistory;

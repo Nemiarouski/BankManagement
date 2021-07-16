@@ -1,4 +1,4 @@
-package com.intexsoft.project.commands.bank.crud;
+package com.intexsoft.project.commands.bank;
 
 import com.intexsoft.project.commands.Command;
 import com.intexsoft.project.services.BankService;
@@ -15,7 +15,7 @@ public class BankCrudCommands implements Command {
                 new CreateBankCommand(consoleHelper, bankService),
                 new DeleteBankCommand(consoleHelper, bankService),
                 new UpdateBankCommand(consoleHelper, bankService),
-                new ShowBanksCommand(bankService),
+                new ShowBanksCommand(consoleHelper, bankService),
                 new SaveBankCommand(bankService),
                 new DownloadBankCommand(bankService)
         );

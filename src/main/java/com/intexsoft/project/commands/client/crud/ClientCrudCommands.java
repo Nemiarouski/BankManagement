@@ -15,7 +15,7 @@ public class ClientCrudCommands implements Command {
                 new CreateClientCommand(consoleHelper, clientService),
                 new DeleteClientCommand(consoleHelper, clientService),
                 new UpdateClientCommand(consoleHelper, clientService),
-                new ShowClientsCommand(clientService),
+                new ShowClientsCommand(consoleHelper, clientService),
                 new SaveClientCommand(clientService),
                 new DownloadClientCommand(clientService));
     }

@@ -48,13 +48,16 @@ public class Bank {
         this.database = database;
     }
 
+    public void addClientToMap(Account account, Client client) {
+        database.put(account, client);
+    }
+
     @Override
     public String toString() {
         return "Bank{" +
                 "bankName='" + bankName + '\'' +
                 ", legalRate=" + legalRate +
                 ", individualRate=" + individualRate +
-                ", database=" + database +
                 '}';
     }
 }

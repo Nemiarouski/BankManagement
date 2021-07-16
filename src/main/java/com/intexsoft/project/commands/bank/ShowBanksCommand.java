@@ -1,21 +1,18 @@
-package com.intexsoft.project.commands.bank.crud;
+package com.intexsoft.project.commands.bank;
 
 import com.intexsoft.project.commands.Command;
 import com.intexsoft.project.entities.Bank;
 import com.intexsoft.project.services.BankService;
+import com.intexsoft.project.utils.ConsoleHelper;
 import java.util.List;
 
 public class ShowBanksCommand implements Command {
+    private final ConsoleHelper consoleHelper;
     private final BankService bankService;
 
-    public ShowBanksCommand(BankService bankService) {
+    public ShowBanksCommand(ConsoleHelper consoleHelper, BankService bankService) {
+        this.consoleHelper = consoleHelper;
         this.bankService = bankService;
-    }
-
-    private void show(List<Bank> banks) {
-        for (int i = 0; i < banks.size(); i++) {
-            System.out.println((i + 1) + ") " + banks.get(i));
-        }
     }
 
     @Override
@@ -26,6 +23,6 @@ public class ShowBanksCommand implements Command {
     @Override
     public void execute() {
         List<Bank> banks = bankService.getEntities();
-        show(banks);
+        consoleHelper.show(banks);
     }
 }

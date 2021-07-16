@@ -1,25 +1,33 @@
-package com.intexsoft.project.commands.bank.crud;
+package com.intexsoft.project.commands.bank;
 
 import com.intexsoft.project.commands.Command;
+import com.intexsoft.project.entities.Bank;
 import com.intexsoft.project.services.BankService;
 import com.intexsoft.project.utils.ConsoleHelper;
+import java.util.List;
 
-public class CreateBankCommand implements Command {
+public class UpdateBankCommand implements Command {
     private final ConsoleHelper consoleHelper;
     private final BankService bankService;
 
-    public CreateBankCommand(ConsoleHelper consoleHelper, BankService bankService) {
+    public UpdateBankCommand(ConsoleHelper consoleHelper, BankService bankService) {
         this.consoleHelper = consoleHelper;
         this.bankService = bankService;
     }
 
     @Override
     public String name() {
-        return "Create Bank";
+        return "Update Bank";
     }
 
     @Override
     public void execute() {
+        List<Bank> banks = bankService.getEntities();
+        consoleHelper.show(banks);
+
+        System.out.println("Choose bank to update:");
+        int choice = consoleHelper.validateIntToValue(banks.size());
+
         System.out.println("Input bank name:");
         String bankName = consoleHelper.read();
 
@@ -29,6 +37,6 @@ public class CreateBankCommand implements Command {
         System.out.println("Input individual rate:");
         double individualRate = consoleHelper.validateDouble();
 
-        bankService.createBank(bankName, legalRate, individualRate);
+        bankService.updateBank(choice, bankName, legalRate, individualRate);
     }
 }

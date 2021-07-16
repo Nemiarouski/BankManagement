@@ -16,12 +16,6 @@ public class UpdateClientCommand implements Command {
         this.clientService = clientService;
     }
 
-    private void show(List<Client> clients) {
-        for (int i = 0; i < clients.size(); i++) {
-            System.out.println((i + 1) + ") " + clients.get(i));
-        }
-    }
-
     private void showClientTypes(List<ClientType> clients) {
         for (int i = 0; i < clients.size(); i++) {
             System.out.println((i + 1) + ") " + clients.get(i).getType());
@@ -41,7 +35,7 @@ public class UpdateClientCommand implements Command {
     @Override
     public void execute() {
         List<Client> clients = clientService.getEntities();
-        show(clients);
+        consoleHelper.show(clients);
 
         System.out.println("Choose client to update:");
         int choice = consoleHelper.validateIntToValue(clients.size());

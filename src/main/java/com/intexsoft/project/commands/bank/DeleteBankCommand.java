@@ -1,4 +1,4 @@
-package com.intexsoft.project.commands.bank.crud;
+package com.intexsoft.project.commands.bank;
 
 import com.intexsoft.project.commands.Command;
 import com.intexsoft.project.entities.Bank;
@@ -15,12 +15,6 @@ public class DeleteBankCommand implements Command {
         this.bankService = bankService;
     }
 
-    private void showBanks(List<Bank> banks) {
-        for (int i = 0; i < banks.size(); i++) {
-            System.out.println((i + 1) + ") " + banks.get(i).toString());
-        }
-    }
-
     private Bank getBankToDelete(List<Bank> banks) {
         int choice = consoleHelper.validateIntToValue(banks.size());
         return banks.get(choice - 1);
@@ -34,7 +28,7 @@ public class DeleteBankCommand implements Command {
     @Override
     public void execute() {
         List<Bank> banks = bankService.getEntities();
-        showBanks(banks);
+        consoleHelper.show(banks);
 
         System.out.println("Input bank to delete");
         Bank bank = getBankToDelete(banks);
