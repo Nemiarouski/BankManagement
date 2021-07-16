@@ -10,6 +10,6 @@ public class WithdrawCashCommand implements Command {
 
     @Override
     public void execute() {
-
+        System.out.println("Option in progress...");
     }
 }

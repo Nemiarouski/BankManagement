@@ -6,6 +6,8 @@ import com.intexsoft.project.entities.Account;
 import com.intexsoft.project.entities.Client;
 import com.intexsoft.project.services.ClientService;
 import com.intexsoft.project.utils.ConsoleHelper;
+
+import java.util.Comparator;
 import java.util.List;
 
 public class ClientAccountsCommand implements Command {
@@ -39,8 +41,8 @@ public class ClientAccountsCommand implements Command {
         Client client = clients.get(choice - 1);
 
         List<Account> accounts = client.getAccounts();
-        for (Account account : accounts) {
-            System.out.println(account);
-        }
+        accounts.stream()
+                .sorted(Comparator.comparing(Account::getBankName))
+                .forEach(System.out::println);
     }
 }

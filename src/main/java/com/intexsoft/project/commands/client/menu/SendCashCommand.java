@@ -5,7 +5,6 @@ import com.intexsoft.project.entities.Client;
 import com.intexsoft.project.services.BankService;
 import com.intexsoft.project.services.ClientService;
 import com.intexsoft.project.utils.ConsoleHelper;
-
 import java.util.List;
 
 public class SendCashCommand implements Command {

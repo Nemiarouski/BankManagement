@@ -27,7 +27,7 @@ public class DeleteClientAccountCommand implements Command {
 
     @Override
     public void execute() {
-        List<Bank> banks = bankService.getEntities();
+        /*List<Bank> banks = bankService.getEntities();
         List<Client> clients = clientService.getEntities();
 
         if (!banks.isEmpty() && !clients.isEmpty()) {
@@ -52,6 +52,7 @@ public class DeleteClientAccountCommand implements Command {
 
         } else {
             System.out.println("Bank or client list is empty.");
-        }
+        }*/
+        System.out.println("Option in progress...");
     }
 }

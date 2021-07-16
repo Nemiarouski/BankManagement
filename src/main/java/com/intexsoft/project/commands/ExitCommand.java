@@ -7,7 +7,5 @@ public class ExitCommand implements Command {
     }
 
     @Override
-    public void execute() {
-        //something
-    }
+    public void execute() {}
 }

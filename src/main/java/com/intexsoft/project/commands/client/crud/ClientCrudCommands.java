@@ -33,7 +33,7 @@ public class ClientCrudCommands implements Command {
 
     @Override
     public String name() {
-        return "Client Menu";
+        return "Client Crud Menu";
     }
 
     @Override
