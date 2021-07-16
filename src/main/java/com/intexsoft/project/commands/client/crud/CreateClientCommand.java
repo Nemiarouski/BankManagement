@@ -39,7 +39,7 @@ public class CreateClientCommand implements Command {
         List<ClientType> clients = List.of(ClientType.values());
         showClientTypes(clients);
 
-        System.out.println("\nChoose client type:");
+        System.out.println("Choose client type:");
         ClientType clientType = getClientType(clients);
 
         clientService.createClient(name, clientType);
