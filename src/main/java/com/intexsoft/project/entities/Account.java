@@ -15,7 +15,7 @@ public class Account {
     public Account(String bankName, CurrencyType currencyType) {
         this.bankName = bankName;
         this.currencyType = currencyType;
-        this.cash = BigDecimal.valueOf(0);
+        this.cash = new BigDecimal("0");
     }
 
     public String getBankName() {
@@ -48,6 +48,10 @@ public class Account {
 
     public void setTransactionHistory(List<Transaction> transactionHistory) {
         this.transactionHistory = transactionHistory;
+    }
+
+    public void addCash(BigDecimal cash) {
+        this.cash = this.cash.add(cash);
     }
 
     public void addTransaction(Transaction transaction) {
