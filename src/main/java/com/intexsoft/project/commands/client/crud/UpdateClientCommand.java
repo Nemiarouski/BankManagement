@@ -46,7 +46,7 @@ public class UpdateClientCommand implements Command {
         List<ClientType> clientTypes = List.of(ClientType.values());
         showClientTypes(clientTypes);
 
-        System.out.println("\nChoose new client type:");
+        System.out.println("Choose new client type:");
         ClientType clientType = getClientType(clientTypes);
 
         clientService.updateClient(choice, name, clientType);

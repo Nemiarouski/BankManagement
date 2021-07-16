@@ -17,8 +17,7 @@ public class BankCrudCommand implements Command {
                 new UpdateBankCommand(consoleHelper, bankService),
                 new ShowBanksCommand(consoleHelper, bankService),
                 new SaveBankCommand(bankService),
-                new DownloadBankCommand(bankService)
-        );
+                new DownloadBankCommand(bankService));
     }
 
     private void showCommands() {
