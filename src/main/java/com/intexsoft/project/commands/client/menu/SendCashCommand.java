@@ -1,4 +1,4 @@
-package com.intexsoft.project.commands.client.cash;
+package com.intexsoft.project.commands.client.menu;
 
 import com.intexsoft.project.commands.Command;
 import com.intexsoft.project.entities.Client;

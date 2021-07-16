@@ -1,7 +1,6 @@
 package com.intexsoft.project.commands.client.menu;
 
 import com.intexsoft.project.commands.Command;
-import com.intexsoft.project.commands.client.cash.SendCashCommand;
 import com.intexsoft.project.services.BankService;
 import com.intexsoft.project.services.ClientService;
 import com.intexsoft.project.utils.ConsoleHelper;
@@ -9,16 +8,16 @@ import java.util.List;
 
 public class ClientMenuCommands implements Command {
     private final ConsoleHelper consoleHelper;
-    private final BankService bankService;
     private final List<Command> clientCommands;
 
     public ClientMenuCommands(ConsoleHelper consoleHelper, BankService bankService, ClientService clientService) {
         this.consoleHelper = consoleHelper;
-        this.bankService = bankService;
         this.clientCommands = List.of(
+                new DepositCashCommand(bankService, clientService, consoleHelper),
+                new WithdrawCashCommand(),
                 new SendCashCommand(consoleHelper, clientService, bankService),
-                new ShowAccountsCommand(consoleHelper, clientService),
-                new ShowTransactionsCommands(consoleHelper, clientService)
+                new ClientAccountsCommand(consoleHelper, clientService),
+                new ClientTransactionsCommand(consoleHelper, clientService)
         );
     }
 

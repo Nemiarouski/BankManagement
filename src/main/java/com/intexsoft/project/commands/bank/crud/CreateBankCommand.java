@@ -1,4 +1,4 @@
-package com.intexsoft.project.commands.bank;
+package com.intexsoft.project.commands.bank.crud;
 
 import com.intexsoft.project.commands.Command;
 import com.intexsoft.project.services.BankService;

@@ -9,12 +9,12 @@ import com.intexsoft.project.services.ClientService;
 import com.intexsoft.project.utils.ConsoleHelper;
 import java.util.List;
 
-public class ShowTransactionsCommands implements Command {
+public class ClientTransactionsCommand implements Command {
     private final ConsoleHelper consoleHelper;
     private final ClientService clientService;
     private final CreateClientCommand createClientCommand;
 
-    public ShowTransactionsCommands(ConsoleHelper consoleHelper, ClientService clientService) {
+    public ClientTransactionsCommand(ConsoleHelper consoleHelper, ClientService clientService) {
         this.consoleHelper = consoleHelper;
         this.clientService = clientService;
         this.createClientCommand = new CreateClientCommand(consoleHelper, clientService);

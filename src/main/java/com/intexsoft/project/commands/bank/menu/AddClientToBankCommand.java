@@ -1,8 +1,6 @@
-package com.intexsoft.project.commands.client.menu;
+package com.intexsoft.project.commands.bank.menu;
 
 import com.intexsoft.project.commands.Command;
-import com.intexsoft.project.commands.bank.CreateBankCommand;
-import com.intexsoft.project.commands.client.crud.CreateClientCommand;
 import com.intexsoft.project.entities.Account;
 import com.intexsoft.project.entities.Bank;
 import com.intexsoft.project.entities.Client;
@@ -34,12 +32,12 @@ public class AddClientToBankCommand implements Command {
         List<Client> clients = clientService.getEntities();
 
         if (!banks.isEmpty() && !clients.isEmpty()) {
-
+            //two same parts
             System.out.println("Choose bank to add client:");
             consoleHelper.show(banks);
             int bankToAdd = consoleHelper.validateIntToValue(banks.size());
             Bank bank = banks.get(bankToAdd - 1);
-
+            //two same parts
             System.out.println("Choose client to add:");
             consoleHelper.show(clients);
             int clientToAdd = consoleHelper.validateIntToValue(clients.size());
@@ -58,8 +56,5 @@ public class AddClientToBankCommand implements Command {
         } else {
             System.out.println("Bank or client list is empty.");
         }
-
-
-
     }
 }

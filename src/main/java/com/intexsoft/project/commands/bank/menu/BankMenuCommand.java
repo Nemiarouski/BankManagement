@@ -1,24 +1,20 @@
-package com.intexsoft.project.commands.bank;
+package com.intexsoft.project.commands.bank.menu;
 
 import com.intexsoft.project.commands.Command;
 import com.intexsoft.project.services.BankService;
+import com.intexsoft.project.services.ClientService;
 import com.intexsoft.project.utils.ConsoleHelper;
 import java.util.List;
 
-public class BankCrudCommands implements Command {
+public class BankMenuCommand implements Command {
     private final ConsoleHelper consoleHelper;
     private final List<Command> bankCommands;
 
-    public BankCrudCommands(ConsoleHelper consoleHelper, BankService bankService) {
+    public BankMenuCommand(ConsoleHelper consoleHelper, ClientService clientService, BankService bankService) {
         this.consoleHelper = consoleHelper;
-        bankCommands = List.of(
-                new CreateBankCommand(consoleHelper, bankService),
-                new DeleteBankCommand(consoleHelper, bankService),
-                new UpdateBankCommand(consoleHelper, bankService),
-                new ShowBanksCommand(consoleHelper, bankService),
-                new SaveBankCommand(bankService),
-                new DownloadBankCommand(bankService)
-        );
+        this.bankCommands = List.of(
+                new AddClientToBankCommand(bankService, clientService, consoleHelper),
+                new DeleteClientAccountCommand(bankService, clientService, consoleHelper));
     }
 
     private void showCommands() {
