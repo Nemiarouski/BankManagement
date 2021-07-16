@@ -25,7 +25,7 @@ public class ShowBanksCommand implements Command {
 
     @Override
     public void execute() {
-        List<Bank> banks = bankService.getBanks();
+        List<Bank> banks = bankService.getEntities();
         show(banks);
     }
 }

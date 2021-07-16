@@ -33,12 +33,12 @@ public class DeleteBankCommand implements Command {
 
     @Override
     public void execute() {
-        List<Bank> banks = bankService.getBanks();
+        List<Bank> banks = bankService.getEntities();
         showBanks(banks);
 
         System.out.println("Input bank to delete");
         Bank bank = getBankToDelete(banks);
 
-        bankService.deleteBank(bank);
+        bankService.deleteEntity(bank);
     }
 }

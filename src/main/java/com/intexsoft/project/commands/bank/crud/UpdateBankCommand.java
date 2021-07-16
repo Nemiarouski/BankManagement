@@ -29,7 +29,7 @@ public class UpdateBankCommand implements Command {
 
     @Override
     public void execute() {
-        List<Bank> banks = bankService.getBanks();
+        List<Bank> banks = bankService.getEntities();
         show(banks);
 
         System.out.println("Choose bank to update:");

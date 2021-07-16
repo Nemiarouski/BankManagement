@@ -33,12 +33,12 @@ public class DeleteClientCommand implements Command {
 
     @Override
     public void execute() {
-        List<Client> clients = clientService.getClients();
+        List<Client> clients = clientService.getEntities();
         showClient(clients);
 
         System.out.println("Input client to delete:");
         Client client = getClientToDelete(clients);
 
-        clientService.deleteClient(client);
+        clientService.deleteEntity(client);
     }
 }

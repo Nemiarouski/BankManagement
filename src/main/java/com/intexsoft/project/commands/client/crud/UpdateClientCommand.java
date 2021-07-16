@@ -40,7 +40,7 @@ public class UpdateClientCommand implements Command {
 
     @Override
     public void execute() {
-        List<Client> clients = clientService.getClients();
+        List<Client> clients = clientService.getEntities();
         show(clients);
 
         System.out.println("Choose client to update:");
