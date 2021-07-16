@@ -5,13 +5,15 @@ import java.util.Map;
 
 public class Bank {
     private String bankName;
-    private double rate;
+    private double legalRate;
+    private double individualRate;
     private Map<Account, Client> database = new HashMap<>();
 
     public Bank() {}
-    public Bank(String bankName, double rate) {
+    public Bank(String bankName, double legalRate, double individualRate) {
         this.bankName = bankName;
-        this.rate = rate;
+        this.legalRate = legalRate;
+        this.individualRate = individualRate;
     }
 
     public String getBankName() {
@@ -22,12 +24,20 @@ public class Bank {
         this.bankName = bankName;
     }
 
-    public double getRate() {
-        return rate;
+    public double getLegalRate() {
+        return legalRate;
     }
 
-    public void setRate(double rate) {
-        this.rate = rate;
+    public void setLegalRate(double legalRate) {
+        this.legalRate = legalRate;
+    }
+
+    public double getIndividualRate() {
+        return individualRate;
+    }
+
+    public void setIndividualRate(double individualRate) {
+        this.individualRate = individualRate;
     }
 
     public Map<Account, Client> getDatabase() {
@@ -40,11 +50,11 @@ public class Bank {
 
     @Override
     public String toString() {
-        return  "[Bank Name]: "
-                + bankName
-                + " [Rate]: "
-                + rate
-                + " [Database]: "
-                + database;
+        return "Bank{" +
+                "bankName='" + bankName + '\'' +
+                ", legalRate=" + legalRate +
+                ", individualRate=" + individualRate +
+                ", database=" + database +
+                '}';
     }
 }

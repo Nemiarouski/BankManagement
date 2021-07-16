@@ -2,14 +2,11 @@ package com.intexsoft.project.commands.bank.crud;
 
 import com.intexsoft.project.commands.Command;
 import com.intexsoft.project.services.BankService;
-import com.intexsoft.project.utils.ConsoleHelper;
 
 public class SaveBankCommand implements Command {
-    private final ConsoleHelper consoleHelper;
     private final BankService bankService;
 
-    public SaveBankCommand(ConsoleHelper consoleHelper, BankService bankService) {
-        this.consoleHelper = consoleHelper;
+    public SaveBankCommand(BankService bankService) {
         this.bankService = bankService;
     }
 
@@ -20,6 +17,6 @@ public class SaveBankCommand implements Command {
 
     @Override
     public void execute() {
-
+        bankService.save();
     }
 }

@@ -20,6 +20,15 @@ public class CreateBankCommand implements Command {
 
     @Override
     public void execute() {
+        System.out.println("Input bank name:");
+        String bankName = consoleHelper.read();
 
+        System.out.println("Input legal rate:");
+        double legalRate = consoleHelper.validateDouble();
+
+        System.out.println("Input individual rate:");
+        double individualRate = consoleHelper.validateDouble();
+
+        bankService.createBank(bankName, legalRate, individualRate);
     }
 }

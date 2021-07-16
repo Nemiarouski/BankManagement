@@ -1,6 +1,9 @@
 package com.intexsoft.project.services;
 
+import com.intexsoft.project.entities.Bank;
 import com.intexsoft.project.repositories.BankRepository;
+import java.io.IOException;
+import java.util.List;
 
 public class BankService {
     private final BankRepository bankRepository;
@@ -9,8 +12,8 @@ public class BankService {
         this.bankRepository = bankRepository;
     }
 
-    public void createBank() {
-
+    public void createBank(String bankName, double legalRate, double individualRate) {
+        bankRepository.createEntity(bankName, legalRate, individualRate);
     }
 
     public void readBank() {
@@ -21,8 +24,27 @@ public class BankService {
 
     }
 
-    public void deleteBank() {
-
+    public void deleteBank(Bank bank) {
+        bankRepository.deleteEntity(bank);
     }
 
+    public List<Bank> getBanks() {
+        return bankRepository.getEntities();
+    }
+
+    public void save() {
+        try {
+            bankRepository.saveEntities();
+        } catch (IOException e) {
+            System.err.println("We have some problems with: " + e);
+        }
+    }
+
+    public void download() {
+        try {
+            bankRepository.downloadEntities();
+        } catch (IOException e) {
+            System.err.println("We have some problems with: " + e);
+        }
+    }
 }

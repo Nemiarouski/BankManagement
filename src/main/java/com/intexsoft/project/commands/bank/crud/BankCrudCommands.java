@@ -14,9 +14,22 @@ public class BankCrudCommands implements Command {
         bankCommands = List.of(
                 new CreateBankCommand(consoleHelper, bankService),
                 new DeleteBankCommand(consoleHelper, bankService),
-                new DownloadBankCommand(consoleHelper, bankService),
-                new SaveBankCommand(consoleHelper, bankService),
-                new UpdateBankCommand(consoleHelper, bankService));
+                new UpdateBankCommand(consoleHelper, bankService),
+                new ShowBanksCommand(bankService),
+                new SaveBankCommand(bankService),
+                new DownloadBankCommand(bankService)
+        );
+    }
+
+    private void showCommands() {
+        for (int i = 0; i < bankCommands.size(); i++) {
+            System.out.println((i + 1) + ") " + bankCommands.get(i).name());
+        }
+    }
+
+    private void chooseCommand() {
+        int choice = consoleHelper.validateIntToValue(bankCommands.size());
+        bankCommands.get(choice - 1).execute();
     }
 
     @Override
@@ -26,10 +39,7 @@ public class BankCrudCommands implements Command {
 
     @Override
     public void execute() {
-        for (int i = 0; i < bankCommands.size(); i++) {
-            System.out.println((i + 1) + ") " + bankCommands.get(i).name());
-        }
-        int choice = consoleHelper.validateIntToValue(bankCommands.size());
-        bankCommands.get(choice - 1).execute();
+        showCommands();
+        chooseCommand();
     }
 }

@@ -3,7 +3,6 @@ package com.intexsoft.project.services;
 import com.intexsoft.project.entities.Client;
 import com.intexsoft.project.entities.ClientType;
 import com.intexsoft.project.repositories.ClientRepository;
-
 import java.io.IOException;
 import java.util.List;
 

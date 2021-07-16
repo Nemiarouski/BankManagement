@@ -1,4 +1,27 @@
 package com.intexsoft.project.commands.bank.crud;
 
-public class ShowBanksCommand {
+import com.intexsoft.project.commands.Command;
+import com.intexsoft.project.entities.Bank;
+import com.intexsoft.project.services.BankService;
+import java.util.List;
+
+public class ShowBanksCommand implements Command {
+    private final BankService bankService;
+
+    public ShowBanksCommand(BankService bankService) {
+        this.bankService = bankService;
+    }
+
+    @Override
+    public String name() {
+        return "Show Banks";
+    }
+
+    @Override
+    public void execute() {
+        List<Bank> banks = bankService.getBanks();
+        for (int i = 0; i < banks.size(); i++) {
+            System.out.println((i + 1) + ") " + banks.get(i));
+        }
+    }
 }

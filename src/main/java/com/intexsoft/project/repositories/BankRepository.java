@@ -9,5 +9,8 @@ public class BankRepository extends AbstractRepository<Bank> {
         return "banks.json";
     }
 
-
+    public void createEntity(String bankName, double legalRate, double individualRate) {
+        Bank bank = new Bank(bankName, legalRate, individualRate);
+        addEntity(bank);
+    }
 }
