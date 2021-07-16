@@ -5,6 +5,8 @@ import com.intexsoft.project.entities.Client;
 import com.intexsoft.project.services.BankService;
 import com.intexsoft.project.services.ClientService;
 import com.intexsoft.project.utils.ConsoleHelper;
+
+import java.math.BigDecimal;
 import java.util.List;
 
 public class SendCashCommand implements Command {
@@ -18,6 +20,23 @@ public class SendCashCommand implements Command {
         this.bankService = bankService;
     }
 
+    private Client getClient(List<Client> clients) {
+        consoleHelper.show(clients);
+        int choice = consoleHelper.validateIntToValue(clients.size());
+        return clients.get(choice - 1);
+    }
+
+    private void send(Client sender, Client receiver, BigDecimal money) {
+        if (!sender.getAccounts().isEmpty() && !receiver.getAccounts().isEmpty()) {
+            BigDecimal compare = new BigDecimal("0");
+            if (sender.getAccounts().stream().findAny().get().getCash().compareTo(compare) > 0)
+            sender.getAccounts().stream().findAny().get().deleteCash(money);
+            receiver.getAccounts().stream().findAny().get().addCash(money);
+        } else {
+            System.out.println("Not enough money to send.");
+        }
+    }
+
     @Override
     public String name() {
         return "Send Cash";
@@ -26,20 +45,21 @@ public class SendCashCommand implements Command {
     @Override
     public void execute() {
         List<Client> clients = clientService.getEntities();
-        if (clients.isEmpty()) {
-            System.out.println("Client list is empty. Create new one.");
-        }
+        if (clients.size() > 1) {
 
-        System.out.println("Choose client to send money:");
-        consoleHelper.show(clients);
-        int choice = consoleHelper.validateIntToValue(clients.size());
-        Client client = clients.get(choice - 1);
+            System.out.println("Choose client to send money:");
+            Client sender = getClient(clients);
 
-        if (!client.getAccounts().isEmpty()) {
+            System.out.println("Choose client to receive money:");
+            Client receiver = getClient(clients);
 
+            System.out.println("How much money to send?");
+            consoleHelper.show(sender.getAccounts());
+            BigDecimal money = BigDecimal.valueOf(consoleHelper.validateDouble());
+
+            send(sender, receiver, money);
         } else {
-            System.out.println("Client hasn't have an accounts yet.");
+            System.out.println("Client list is empty.");
         }
-
     }
 }

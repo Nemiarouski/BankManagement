@@ -54,6 +54,10 @@ public class Account {
         this.cash = this.cash.add(cash);
     }
 
+    public void deleteCash(BigDecimal cash) {
+        this.cash = this.cash.subtract(cash);
+    }
+
     public void addTransaction(Transaction transaction) {
         transactionHistory.add(transaction);
     }

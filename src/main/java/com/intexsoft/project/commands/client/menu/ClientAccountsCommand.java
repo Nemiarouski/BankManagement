@@ -6,7 +6,6 @@ import com.intexsoft.project.entities.Account;
 import com.intexsoft.project.entities.Client;
 import com.intexsoft.project.services.ClientService;
 import com.intexsoft.project.utils.ConsoleHelper;
-
 import java.util.Comparator;
 import java.util.List;
 
