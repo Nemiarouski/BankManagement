@@ -17,12 +17,8 @@ public class ClientService {
         clientRepository.createEntity(name, clientType);
     }
 
-    public void readClient() {
-
-    }
-
-    public void updateClient() {
-
+    public void updateClient(int choice, String name, ClientType clientType) {
+        clientRepository.updateEntity(choice, name, clientType);
     }
 
     public void deleteClient(Client client) {

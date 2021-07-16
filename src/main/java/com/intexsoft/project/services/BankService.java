@@ -16,12 +16,8 @@ public class BankService {
         bankRepository.createEntity(bankName, legalRate, individualRate);
     }
 
-    public void readBank() {
-
-    }
-
-    public void updateBank() {
-
+    public void updateBank(int choice, String bankName, double legalRate, double individualRate) {
+        bankRepository.updateEntity(choice, bankName, legalRate, individualRate);
     }
 
     public void deleteBank(Bank bank) {

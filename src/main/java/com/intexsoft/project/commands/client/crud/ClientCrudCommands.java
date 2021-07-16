@@ -20,6 +20,17 @@ public class ClientCrudCommands implements Command {
                 new DownloadClientCommand(clientService));
     }
 
+    private void showCommands() {
+        for (int i = 0; i < clientCommands.size(); i++) {
+            System.out.println((i + 1) + ") " + clientCommands.get(i).name());
+        }
+    }
+
+    private void chooseCommand() {
+        int choice = consoleHelper.validateIntToValue(clientCommands.size());
+        clientCommands.get(choice - 1).execute();
+    }
+
     @Override
     public String name() {
         return "Client Crud Menu";
@@ -27,10 +38,7 @@ public class ClientCrudCommands implements Command {
 
     @Override
     public void execute() {
-        for (int i = 0; i < clientCommands.size(); i++) {
-            System.out.println((i + 1) + ") " + clientCommands.get(i).name());
-        }
-        int choice = consoleHelper.validateIntToValue(clientCommands.size());
-        clientCommands.get(choice - 1).execute();
+        showCommands();
+        chooseCommand();
     }
 }

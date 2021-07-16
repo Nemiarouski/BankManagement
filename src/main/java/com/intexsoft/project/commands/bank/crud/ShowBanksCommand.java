@@ -12,6 +12,12 @@ public class ShowBanksCommand implements Command {
         this.bankService = bankService;
     }
 
+    private void show(List<Bank> banks) {
+        for (int i = 0; i < banks.size(); i++) {
+            System.out.println((i + 1) + ") " + banks.get(i));
+        }
+    }
+
     @Override
     public String name() {
         return "Show Banks";
@@ -20,8 +26,6 @@ public class ShowBanksCommand implements Command {
     @Override
     public void execute() {
         List<Bank> banks = bankService.getBanks();
-        for (int i = 0; i < banks.size(); i++) {
-            System.out.println((i + 1) + ") " + banks.get(i));
-        }
+        show(banks);
     }
 }

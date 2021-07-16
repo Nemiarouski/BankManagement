@@ -33,14 +33,14 @@ public class CreateClientCommand implements Command {
 
     @Override
     public void execute() {
+        System.out.println("Input client name:");
+        String name = consoleHelper.read();
+
         List<ClientType> clients = List.of(ClientType.values());
         showClientTypes(clients);
 
         System.out.println("\nChoose client type:");
         ClientType clientType = getClientType(clients);
-
-        System.out.println("Input client name:");
-        String name = consoleHelper.read();
 
         clientService.createClient(name, clientType);
     }
