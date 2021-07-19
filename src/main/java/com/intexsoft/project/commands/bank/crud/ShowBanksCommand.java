@@ -3,26 +3,26 @@ package com.intexsoft.project.commands.bank.crud;
 import com.intexsoft.project.commands.Command;
 import com.intexsoft.project.entities.Bank;
 import com.intexsoft.project.services.BankService;
-import com.intexsoft.project.utils.ConsoleHelper;
+import com.intexsoft.project.utils.CommandHelper;
 import java.util.List;
 
 public class ShowBanksCommand implements Command {
-    private final ConsoleHelper consoleHelper;
+    private final CommandHelper commandHelper;
     private final BankService bankService;
 
-    public ShowBanksCommand(ConsoleHelper consoleHelper, BankService bankService) {
-        this.consoleHelper = consoleHelper;
+    public ShowBanksCommand(CommandHelper commandHelper, BankService bankService) {
+        this.commandHelper = commandHelper;
         this.bankService = bankService;
     }
 
     @Override
-    public String name() {
+    public String getName() {
         return "Show Banks";
     }
 
     @Override
     public void execute() {
         List<Bank> banks = bankService.getEntities();
-        consoleHelper.show(banks);
+        commandHelper.show(banks);
     }
 }

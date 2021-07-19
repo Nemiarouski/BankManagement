@@ -11,7 +11,7 @@ public class DownloadBankCommand implements Command {
     }
 
     @Override
-    public String name() {
+    public String getName() {
         return "Download Bank";
     }
 

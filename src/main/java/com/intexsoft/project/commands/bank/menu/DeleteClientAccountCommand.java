@@ -1,27 +1,23 @@
 package com.intexsoft.project.commands.bank.menu;
 
 import com.intexsoft.project.commands.Command;
-import com.intexsoft.project.entities.Account;
-import com.intexsoft.project.entities.Bank;
-import com.intexsoft.project.entities.Client;
 import com.intexsoft.project.services.BankService;
 import com.intexsoft.project.services.ClientService;
-import com.intexsoft.project.utils.ConsoleHelper;
-import java.util.List;
+import com.intexsoft.project.utils.CommandHelper;
 
 public class DeleteClientAccountCommand implements Command {
     private final BankService bankService;
     private final ClientService clientService;
-    private final ConsoleHelper consoleHelper;
+    private final CommandHelper commandHelper;
 
-    public DeleteClientAccountCommand(BankService bankService, ClientService clientService, ConsoleHelper consoleHelper) {
+    public DeleteClientAccountCommand(BankService bankService, ClientService clientService, CommandHelper commandHelper) {
         this.bankService = bankService;
         this.clientService = clientService;
-        this.consoleHelper = consoleHelper;
+        this.commandHelper = commandHelper;
     }
 
     @Override
-    public String name() {
+    public String getName() {
         return "Delete Client Account";
     }
 
@@ -53,6 +49,6 @@ public class DeleteClientAccountCommand implements Command {
         } else {
             System.out.println("Bank or client list is empty.");
         }*/
-        System.out.println("Option in progress...");
+        System.out.println("Function in progress...");
     }
 }

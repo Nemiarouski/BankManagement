@@ -3,26 +3,26 @@ package com.intexsoft.project.commands.client.crud;
 import com.intexsoft.project.commands.Command;
 import com.intexsoft.project.entities.Client;
 import com.intexsoft.project.services.ClientService;
-import com.intexsoft.project.utils.ConsoleHelper;
+import com.intexsoft.project.utils.CommandHelper;
 import java.util.List;
 
 public class ShowClientsCommand implements Command {
-    private final ConsoleHelper consoleHelper;
+    private final CommandHelper commandHelper;
     private final ClientService clientService;
 
-    public ShowClientsCommand(ConsoleHelper consoleHelper, ClientService clientService) {
-        this.consoleHelper = consoleHelper;
+    public ShowClientsCommand(CommandHelper commandHelper, ClientService clientService) {
+        this.commandHelper = commandHelper;
         this.clientService = clientService;
     }
 
     @Override
-    public String name() {
+    public String getName() {
         return "Show Clients";
     }
 
     @Override
     public void execute() {
         List<Client> clients = clientService.getEntities();
-        consoleHelper.show(clients);
+        commandHelper.show(clients);
     }
 }

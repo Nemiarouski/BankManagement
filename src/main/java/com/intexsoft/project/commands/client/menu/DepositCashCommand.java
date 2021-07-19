@@ -3,25 +3,22 @@ package com.intexsoft.project.commands.client.menu;
 import com.intexsoft.project.commands.Command;
 import com.intexsoft.project.entities.Account;
 import com.intexsoft.project.entities.Client;
-import com.intexsoft.project.services.BankService;
 import com.intexsoft.project.services.ClientService;
-import com.intexsoft.project.utils.ConsoleHelper;
+import com.intexsoft.project.utils.CommandHelper;
 import java.math.BigDecimal;
 import java.util.List;
 
 public class DepositCashCommand implements Command {
-    private final BankService bankService;
     private final ClientService clientService;
-    private final ConsoleHelper consoleHelper;
+    private final CommandHelper commandHelper;
 
-    public DepositCashCommand(BankService bankService, ClientService clientService, ConsoleHelper consoleHelper) {
-        this.bankService = bankService;
+    public DepositCashCommand(ClientService clientService, CommandHelper commandHelper) {
         this.clientService = clientService;
-        this.consoleHelper = consoleHelper;
+        this.commandHelper = commandHelper;
     }
 
     @Override
-    public String name() {
+    public String getName() {
         return "Deposit Cash";
     }
 
@@ -29,19 +26,19 @@ public class DepositCashCommand implements Command {
     public void execute() {
         Account account;
         List<Client> clients = clientService.getEntities();
-        consoleHelper.show(clients);
 
         System.out.println("Choose client to deposit money:");
-        int choice = consoleHelper.validateIntToValue(clients.size());
-        Client client = clients.get(choice - 1);
+        Client client = commandHelper.getEntity(clients);
 
         if (!client.getAccounts().isEmpty()) {
             System.out.println("Choose account:");
-            consoleHelper.show(client.getAccounts());
-            int accountToDeposit = consoleHelper.validateIntToValue(client.getAccounts().size());
-            account = client.getAccounts().get(accountToDeposit - 1);
+
+            List<Account> accounts = client.getAccounts();
+            account = commandHelper.getEntity(accounts);
+
             System.out.println("How much money to deposit?");
-            BigDecimal money = BigDecimal.valueOf(consoleHelper.validateInt());
+            BigDecimal money = BigDecimal.valueOf(commandHelper.validateInt());
+
             account.addCash(money);
         } else {
             System.out.println("Create account before deposit money");

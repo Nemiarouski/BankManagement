@@ -2,32 +2,32 @@ package com.intexsoft.project.commands.bank.crud;
 
 import com.intexsoft.project.commands.Command;
 import com.intexsoft.project.services.BankService;
-import com.intexsoft.project.utils.ConsoleHelper;
+import com.intexsoft.project.utils.CommandHelper;
 
 public class CreateBankCommand implements Command {
-    private final ConsoleHelper consoleHelper;
+    private final CommandHelper commandHelper;
     private final BankService bankService;
 
-    public CreateBankCommand(ConsoleHelper consoleHelper, BankService bankService) {
-        this.consoleHelper = consoleHelper;
+    public CreateBankCommand(CommandHelper commandHelper, BankService bankService) {
+        this.commandHelper = commandHelper;
         this.bankService = bankService;
     }
 
     @Override
-    public String name() {
+    public String getName() {
         return "Create Bank";
     }
 
     @Override
     public void execute() {
         System.out.println("Input bank name:");
-        String bankName = consoleHelper.read();
+        String bankName = commandHelper.read();
 
         System.out.println("Input legal rate:");
-        double legalRate = consoleHelper.validateDouble();
+        double legalRate = commandHelper.validateDouble();
 
         System.out.println("Input individual rate:");
-        double individualRate = consoleHelper.validateDouble();
+        double individualRate = commandHelper.validateDouble();
 
         bankService.createBank(bankName, legalRate, individualRate);
     }

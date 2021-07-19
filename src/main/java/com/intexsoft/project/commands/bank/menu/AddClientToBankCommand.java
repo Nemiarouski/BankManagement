@@ -7,22 +7,22 @@ import com.intexsoft.project.entities.Client;
 import com.intexsoft.project.entities.CurrencyType;
 import com.intexsoft.project.services.BankService;
 import com.intexsoft.project.services.ClientService;
-import com.intexsoft.project.utils.ConsoleHelper;
+import com.intexsoft.project.utils.CommandHelper;
 import java.util.List;
 
 public class AddClientToBankCommand implements Command {
     private final BankService bankService;
     private final ClientService clientService;
-    private final ConsoleHelper consoleHelper;
+    private final CommandHelper commandHelper;
 
-    public AddClientToBankCommand(BankService bankService, ClientService clientService, ConsoleHelper consoleHelper) {
+    public AddClientToBankCommand(BankService bankService, ClientService clientService, CommandHelper commandHelper) {
         this.bankService = bankService;
         this.clientService = clientService;
-        this.consoleHelper = consoleHelper;
+        this.commandHelper = commandHelper;
     }
 
     @Override
-    public String name() {
+    public String getName() {
         return "Add Client To Bank";
     }
 
@@ -30,25 +30,19 @@ public class AddClientToBankCommand implements Command {
     public void execute() {
         List<Bank> banks = bankService.getEntities();
         List<Client> clients = clientService.getEntities();
+        List<CurrencyType> currencyTypes = List.of(CurrencyType.values());
 
         if (!banks.isEmpty() && !clients.isEmpty()) {
-            //two same parts
-            System.out.println("Choose bank to add client:");
-            consoleHelper.show(banks);
-            int bankToAdd = consoleHelper.validateIntToValue(banks.size());
-            Bank bank = banks.get(bankToAdd - 1);
-            //two same parts
-            System.out.println("Choose client to add:");
-            consoleHelper.show(clients);
-            int clientToAdd = consoleHelper.validateIntToValue(clients.size());
-            Client client = clients.get(clientToAdd - 1);
 
-            System.out.println("Create account.");
-            List<CurrencyType> currencyTypes = List.of(CurrencyType.values());
-            System.out.println("Choose currency:");
-            consoleHelper.show(currencyTypes);
-            int currency = consoleHelper.validateIntToValue(currencyTypes.size());
-            CurrencyType currencyType = currencyTypes.get(currency - 1);
+            System.out.println("Choose bank to add client:");
+            Bank bank = commandHelper.getEntity(banks);
+
+            System.out.println("Choose client to add:");
+            Client client = commandHelper.getEntity(clients);
+
+            System.out.println("Create account. Choose currency");
+            CurrencyType currencyType = commandHelper.getEntity(currencyTypes);
+
             Account account = new Account(bank.getBankName(), currencyType);
 
             client.addAccount(account);

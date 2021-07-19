@@ -11,7 +11,7 @@ public class SaveClientCommand implements Command {
     }
 
     @Override
-    public String name() {
+    public String getName() {
         return "Save Clients";
     }
 

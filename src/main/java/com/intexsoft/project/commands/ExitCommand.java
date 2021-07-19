@@ -2,7 +2,7 @@ package com.intexsoft.project.commands;
 
 public class ExitCommand implements Command {
     @Override
-    public String name() {
+    public String getName() {
         return "Exit";
     }
 

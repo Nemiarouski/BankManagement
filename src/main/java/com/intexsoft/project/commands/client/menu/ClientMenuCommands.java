@@ -3,37 +3,36 @@ package com.intexsoft.project.commands.client.menu;
 import com.intexsoft.project.commands.Command;
 import com.intexsoft.project.services.BankService;
 import com.intexsoft.project.services.ClientService;
-import com.intexsoft.project.utils.ConsoleHelper;
+import com.intexsoft.project.utils.CommandHelper;
 import java.util.List;
 
 public class ClientMenuCommands implements Command {
-    private final ConsoleHelper consoleHelper;
+    private final CommandHelper commandHelper;
     private final List<Command> clientCommands;
 
-    public ClientMenuCommands(ConsoleHelper consoleHelper, BankService bankService, ClientService clientService) {
-        this.consoleHelper = consoleHelper;
+    public ClientMenuCommands(CommandHelper commandHelper, BankService bankService, ClientService clientService) {
+        this.commandHelper = commandHelper;
         this.clientCommands = List.of(
-                new DepositCashCommand(bankService, clientService, consoleHelper),
-                new WithdrawCashCommand(),
-                new SendCashCommand(consoleHelper, clientService, bankService),
-                new ClientAccountsCommand(consoleHelper, clientService),
-                new ClientTransactionsCommand(consoleHelper, clientService)
-        );
+                new DepositCashCommand(clientService, commandHelper),
+                new WithdrawCashCommand(clientService, commandHelper),
+                new SendCashCommand(commandHelper, clientService, bankService),
+                new ClientAccountsCommand(commandHelper, clientService),
+                new ClientTransactionsCommand(commandHelper, clientService));
     }
 
     private void show() {
         for (int i = 0; i < clientCommands.size(); i++) {
-            System.out.println((i + 1) + ") " + clientCommands.get(i).name());
+            System.out.println((i + 1) + ") " + clientCommands.get(i).getName());
         }
     }
 
     private void chooseCommand() {
-        int choice = consoleHelper.validateIntToValue(clientCommands.size());
+        int choice = commandHelper.validateIntToValue(clientCommands.size());
         clientCommands.get(choice - 1).execute();
     }
 
     @Override
-    public String name() {
+    public String getName() {
         return "Client Menu";
     }
 

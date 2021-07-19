@@ -1,6 +1,7 @@
 package com.intexsoft.project.entities;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -9,7 +10,7 @@ public class Account {
     private String bankName;
     private CurrencyType currencyType;
     private BigDecimal cash;
-    private List<Transaction> transactionHistory = new ArrayList<>();
+    private List<Transaction> transactions = new ArrayList<>();
 
     public Account() {}
     public Account(String bankName, CurrencyType currencyType) {
@@ -35,19 +36,19 @@ public class Account {
     }
 
     public BigDecimal getCash() {
-        return cash;
+        return cash.setScale(3, RoundingMode.HALF_DOWN);
     }
 
     public void setCash(BigDecimal cash) {
         this.cash = cash;
     }
 
-    public List<Transaction> getTransactionHistory() {
-        return transactionHistory;
+    public List<Transaction> getTransactions() {
+        return transactions;
     }
 
-    public void setTransactionHistory(List<Transaction> transactionHistory) {
-        this.transactionHistory = transactionHistory;
+    public void setTransactions(List<Transaction> transactions) {
+        this.transactions = transactions;
     }
 
     public void addCash(BigDecimal cash) {
@@ -59,7 +60,7 @@ public class Account {
     }
 
     public void addTransaction(Transaction transaction) {
-        transactionHistory.add(transaction);
+        transactions.add(transaction);
     }
 
     @Override
@@ -67,12 +68,12 @@ public class Account {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Account account = (Account) o;
-        return Objects.equals(bankName, account.bankName) && currencyType == account.currencyType && Objects.equals(cash, account.cash) && Objects.equals(transactionHistory, account.transactionHistory);
+        return Objects.equals(bankName, account.bankName) && currencyType == account.currencyType && Objects.equals(cash, account.cash) && Objects.equals(transactions, account.transactions);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(bankName, currencyType, cash, transactionHistory);
+        return Objects.hash(bankName, currencyType, cash, transactions);
     }
 
     @Override
@@ -81,8 +82,8 @@ public class Account {
                 + " [Currency Type]: "
                 + currencyType
                 + " [Cash]: "
-                + cash
+                + cash.setScale(3, RoundingMode.HALF_DOWN)
                 + " [Transaction History]: "
-                + transactionHistory;
+                + transactions;
     }
 }

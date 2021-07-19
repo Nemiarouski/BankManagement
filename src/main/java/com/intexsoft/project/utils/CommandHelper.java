@@ -3,7 +3,7 @@ package com.intexsoft.project.utils;
 import java.util.List;
 import java.util.Scanner;
 
-public class ConsoleHelper {
+public class CommandHelper {
     private final Scanner scanner = new Scanner(System.in);
 
     public String read() {
@@ -26,7 +26,6 @@ public class ConsoleHelper {
         } while (inputNumber <= 0 || inputNumber > value);
         return inputNumber;
     }
-
 
     public int validateInt() {
         int inputNumber;
@@ -58,5 +57,11 @@ public class ConsoleHelper {
         for (int i = 0; i < t.size(); i++) {
             System.out.println((i + 1) + ") " + t.get(i));
         }
+    }
+
+    public  <T> T getEntity(List<T> entities) {
+        show(entities);
+        int entityToAdd = validateIntToValue(entities.size());
+        return entities.get(entityToAdd - 1);
     }
 }

@@ -26,4 +26,4 @@
 -        проведенные клиентом за указанный период
 + данные можно хранить либо в json-файле либо в базе данных
 
-1. Some problem with save/download information.
+1. Some problem with save/download information, need to synchronize them.

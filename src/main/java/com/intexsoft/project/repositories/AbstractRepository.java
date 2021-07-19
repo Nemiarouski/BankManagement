@@ -12,16 +12,24 @@ public abstract class AbstractRepository <T> {
 
     protected abstract String filepath();
 
-    public void deleteEntity(T t) {
-        entities.remove(t);
-    }
-
     public List<T> getEntities() {
         return entities;
     }
 
     public void addEntity(T t) {
         entities.add(t);
+    }
+
+    public void createEntity(T t) {
+        addEntity(t);
+    }
+
+    public void updateEntity(int choice, T t) {
+        entities.set(choice - 1, t);
+    }
+
+    public void deleteEntity(T t) {
+        entities.remove(t);
     }
 
     public void saveEntities() throws IOException {

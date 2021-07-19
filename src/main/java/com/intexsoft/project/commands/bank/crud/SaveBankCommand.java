@@ -11,7 +11,7 @@ public class SaveBankCommand implements Command {
     }
 
     @Override
-    public String name() {
+    public String getName() {
         return "Save Bank";
     }
 

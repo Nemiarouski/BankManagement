@@ -11,7 +11,7 @@ public class DownloadClientCommand implements Command {
     }
 
     @Override
-    public String name() {
+    public String getName() {
         return "Download Client";
     }
 

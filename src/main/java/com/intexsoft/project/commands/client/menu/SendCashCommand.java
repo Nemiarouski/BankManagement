@@ -1,65 +1,105 @@
 package com.intexsoft.project.commands.client.menu;
 
 import com.intexsoft.project.commands.Command;
-import com.intexsoft.project.entities.Client;
+import com.intexsoft.project.entities.*;
 import com.intexsoft.project.services.BankService;
 import com.intexsoft.project.services.ClientService;
-import com.intexsoft.project.utils.ConsoleHelper;
-
+import com.intexsoft.project.utils.CommandHelper;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 public class SendCashCommand implements Command {
-    private final ConsoleHelper consoleHelper;
+    private final CommandHelper commandHelper;
     private final ClientService clientService;
     private final BankService bankService;
 
-    public SendCashCommand(ConsoleHelper consoleHelper, ClientService clientService, BankService bankService) {
-        this.consoleHelper = consoleHelper;
+    public SendCashCommand(CommandHelper commandHelper, ClientService clientService, BankService bankService) {
+        this.commandHelper = commandHelper;
         this.clientService = clientService;
         this.bankService = bankService;
     }
 
-    private Client getClient(List<Client> clients) {
-        consoleHelper.show(clients);
-        int choice = consoleHelper.validateIntToValue(clients.size());
-        return clients.get(choice - 1);
-    }
-
-    private void send(Client sender, Client receiver, BigDecimal money) {
-        if (!sender.getAccounts().isEmpty() && !receiver.getAccounts().isEmpty()) {
-            BigDecimal compare = new BigDecimal("0");
-            if (sender.getAccounts().stream().findAny().get().getCash().compareTo(compare) > 0)
-            sender.getAccounts().stream().findAny().get().deleteCash(money);
-            receiver.getAccounts().stream().findAny().get().addCash(money);
+    private void chooseSendingType(Client sender, Account senderAccount, Account receiverAccount, BigDecimal money) {
+        if (senderAccount.getBankName().equals(receiverAccount.getBankName())) {
+            sendCashInSameBank(senderAccount, receiverAccount, money);
         } else {
-            System.out.println("Not enough money to send.");
+            sendCashInDifferentBanks(sender, senderAccount, receiverAccount, money);
         }
     }
 
+    private void converter(Account senderAccount, Account receiverAccount, BigDecimal money) {
+        CurrencyType senderCurrency = senderAccount.getCurrencyType();
+        CurrencyType receiverCurrency = receiverAccount.getCurrencyType();
+
+        BigDecimal receiverMoney = BigDecimal.valueOf((senderCurrency.getCurrency() * money.doubleValue()) / receiverCurrency.getCurrency());
+        receiverAccount.addCash(receiverMoney);
+    }
+
+    private void sendCashInSameBank(Account senderAccount, Account receiverAccount, BigDecimal money) {
+        converter(senderAccount, receiverAccount, money);
+        senderAccount.deleteCash(money);
+    }
+
+    private BigDecimal getPercent(Client sender, Account senderAccount) {
+        BigDecimal percent = BigDecimal.valueOf(0);
+
+        ClientType senderType = sender.getClientType();
+
+        List<Bank> banks = bankService.getT().getEntities();
+        Optional<Bank> optionalBank = banks.stream()
+                .filter(b -> b.getBankName().equals(senderAccount.getBankName()))
+                .findFirst();
+
+        if (optionalBank.isPresent()) {
+            Bank senderBank = optionalBank.get();
+            if (senderType.equals(ClientType.INDIVIDUAL)) {
+                percent = BigDecimal.valueOf(senderBank.getIndividualRate() / 100);
+            } else {
+                percent = BigDecimal.valueOf(senderBank.getLegalRate() / 100);
+            }
+        }
+        return percent;
+    }
+
+    private void sendCashInDifferentBanks(Client sender, Account senderAccount, Account receiverAccount, BigDecimal money) {
+        converter(senderAccount, receiverAccount, money);
+        money = money.add(money.multiply(getPercent(sender, senderAccount)));
+        senderAccount.deleteCash(money);
+    }
+
     @Override
-    public String name() {
+    public String getName() {
         return "Send Cash";
     }
 
     @Override
     public void execute() {
         List<Client> clients = clientService.getEntities();
-        if (clients.size() > 1) {
+        if (clients.size() > 0) {
 
             System.out.println("Choose client to send money:");
-            Client sender = getClient(clients);
+            Client sender = commandHelper.getEntity(clients);
 
-            System.out.println("Choose client to receive money:");
-            Client receiver = getClient(clients);
+            List<Account> senderAccounts = sender.getAccounts();
+            Account senderAccount = commandHelper.getEntity(senderAccounts);
 
             System.out.println("How much money to send?");
-            consoleHelper.show(sender.getAccounts());
-            BigDecimal money = BigDecimal.valueOf(consoleHelper.validateDouble());
+            BigDecimal money = BigDecimal.valueOf(commandHelper.validateDouble());
 
-            send(sender, receiver, money);
+            if (money.add(money.multiply(getPercent(sender, senderAccount))).compareTo(senderAccount.getCash()) <= 0) {
+                System.out.println("Choose client to receive money:");
+                Client receiver = commandHelper.getEntity(clients);
+
+                List<Account> receiverAccounts = receiver.getAccounts();
+                Account receiverAccount = commandHelper.getEntity(receiverAccounts);
+
+                chooseSendingType(sender, senderAccount, receiverAccount, money);
+            } else {
+                System.out.println("Isn't enough money to send.");
+            }
         } else {
-            System.out.println("Client list is empty.");
+            System.out.println("Need more client to send money.");
         }
     }
 }
