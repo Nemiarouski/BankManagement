@@ -72,7 +72,7 @@ public class HelpCommand implements Command {
 
     private void showAllCommands(List<Command> commands) {
         for (Command command : commands) {
-            System.out.println(command.getName());
+            System.out.println("[" + command.getName() + "]");
             System.out.println("  - " + command.describe());
         }
     }
@@ -96,7 +96,7 @@ public class HelpCommand implements Command {
         System.out.println();
         showAllCommands(clientMenuCommands);
         System.out.println();
-        System.out.println(exitCommand.getName());
+        System.out.println("[" + exitCommand.getName() + "]");
         System.out.println("  - " + exitCommand.describe());
         System.out.println();
     }
