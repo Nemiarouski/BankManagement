@@ -19,4 +19,9 @@ public class SaveClientCommand implements Command {
     public void execute() {
         clientService.save();
     }
+
+    @Override
+    public String describe() {
+        return "Save all clients in json file.";
+    }
 }

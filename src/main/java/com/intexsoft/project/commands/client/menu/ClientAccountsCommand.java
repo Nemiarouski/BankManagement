@@ -38,4 +38,9 @@ public class ClientAccountsCommand implements Command {
             System.out.println("Client list is empty. Create new one.");
         }
     }
+
+    @Override
+    public String describe() {
+        return "Show all accounts from special client.";
+    }
 }

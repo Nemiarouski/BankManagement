@@ -51,4 +51,9 @@ public class UpdateClientCommand implements Command {
 
         clientService.updateClient(choice, name, clientType);
     }
+
+    @Override
+    public String describe() {
+        return "Update some information about clients.";
+    }
 }

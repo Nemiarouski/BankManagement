@@ -25,4 +25,9 @@ public class ShowBanksCommand implements Command {
         List<Bank> banks = bankService.getEntities();
         commandHelper.show(banks);
     }
+
+    @Override
+    public String describe() {
+        return "Show all banks in bank system.";
+    }
 }

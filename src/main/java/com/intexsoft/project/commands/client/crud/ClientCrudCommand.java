@@ -5,11 +5,11 @@ import com.intexsoft.project.services.ClientService;
 import com.intexsoft.project.utils.CommandHelper;
 import java.util.List;
 
-public class ClientCrudCommands implements Command {
+public class ClientCrudCommand implements Command {
     private final CommandHelper commandHelper;
     private final List<Command> clientCommands;
 
-    public ClientCrudCommands(CommandHelper commandHelper, ClientService clientService) {
+    public ClientCrudCommand(CommandHelper commandHelper, ClientService clientService) {
         this.commandHelper = commandHelper;
         clientCommands = List.of(
                 new CreateClientCommand(commandHelper, clientService),
@@ -40,5 +40,10 @@ public class ClientCrudCommands implements Command {
     public void execute() {
         showCommands();
         chooseCommand();
+    }
+
+    @Override
+    public String describe() {
+        return "Show all commands to create/delete/update/save/download/show clients.";
     }
 }

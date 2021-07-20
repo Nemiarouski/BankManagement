@@ -41,4 +41,9 @@ public class BankCrudCommand implements Command {
         showCommands();
         chooseCommand();
     }
+
+    @Override
+    public String describe() {
+        return "Show all commands to create/delete/update/save/download/show banks.";
+    }
 }

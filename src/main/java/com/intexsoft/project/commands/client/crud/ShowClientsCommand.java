@@ -25,4 +25,9 @@ public class ShowClientsCommand implements Command {
         List<Client> clients = clientService.getEntities();
         commandHelper.show(clients);
     }
+
+    @Override
+    public String describe() {
+        return "Show all clients in client system.";
+    }
 }

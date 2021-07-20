@@ -51,4 +51,9 @@ public class DeleteClientAccountCommand implements Command {
         }*/
         System.out.println("Function in progress...");
     }
+
+    @Override
+    public String describe() {
+        return "Delete client account from special bank.";
+    }
 }

@@ -6,11 +6,11 @@ import com.intexsoft.project.services.ClientService;
 import com.intexsoft.project.utils.CommandHelper;
 import java.util.List;
 
-public class ClientMenuCommands implements Command {
+public class ClientMenuCommand implements Command {
     private final CommandHelper commandHelper;
     private final List<Command> clientCommands;
 
-    public ClientMenuCommands(CommandHelper commandHelper, BankService bankService, ClientService clientService) {
+    public ClientMenuCommand(CommandHelper commandHelper, BankService bankService, ClientService clientService) {
         this.commandHelper = commandHelper;
         this.clientCommands = List.of(
                 new DepositCashCommand(clientService, commandHelper),
@@ -40,5 +40,10 @@ public class ClientMenuCommands implements Command {
     public void execute() {
         show();
         chooseCommand();
+    }
+
+    @Override
+    public String describe() {
+        return "Show commands which client can use in bank.";
     }
 }

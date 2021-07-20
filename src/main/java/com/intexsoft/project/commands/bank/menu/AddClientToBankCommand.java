@@ -51,4 +51,9 @@ public class AddClientToBankCommand implements Command {
             System.out.println("Bank or client list is empty.");
         }
     }
+
+    @Override
+    public String describe() {
+        return "Add client to special bank.";
+    }
 }

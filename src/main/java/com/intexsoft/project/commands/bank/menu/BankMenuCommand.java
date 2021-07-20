@@ -14,7 +14,8 @@ public class BankMenuCommand implements Command {
         this.commandHelper = commandHelper;
         this.bankCommands = List.of(
                 new AddClientToBankCommand(bankService, clientService, commandHelper),
-                new DeleteClientAccountCommand(bankService, clientService, commandHelper));
+                new DeleteClientAccountCommand(bankService, clientService, commandHelper),
+                new DownloadDatabaseCommand(clientService, bankService));
     }
 
     private void showCommands() {
@@ -37,5 +38,10 @@ public class BankMenuCommand implements Command {
     public void execute() {
         showCommands();
         chooseCommand();
+    }
+
+    @Override
+    public String describe() {
+        return "Show options which bank can offer to client.";
     }
 }

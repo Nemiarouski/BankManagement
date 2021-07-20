@@ -44,4 +44,9 @@ public class DepositCashCommand implements Command {
             System.out.println("Create account before deposit money");
         }
     }
+
+    @Override
+    public String describe() {
+        return "Command help client to deposit his money to account.";
+    }
 }

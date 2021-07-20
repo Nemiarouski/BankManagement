@@ -102,4 +102,9 @@ public class SendCashCommand implements Command {
             System.out.println("Need more client to send money.");
         }
     }
+
+    @Override
+    public String describe() {
+        return "Command help to send some money from one client to another.";
+    }
 }

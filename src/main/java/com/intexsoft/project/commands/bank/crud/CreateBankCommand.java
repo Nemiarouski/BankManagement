@@ -31,4 +31,9 @@ public class CreateBankCommand implements Command {
 
         bankService.createBank(bankName, legalRate, individualRate);
     }
+
+    @Override
+    public String describe() {
+        return "Create new bank and add it to bank list.";
+    }
 }

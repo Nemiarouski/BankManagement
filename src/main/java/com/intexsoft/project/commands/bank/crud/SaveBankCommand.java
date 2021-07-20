@@ -19,4 +19,9 @@ public class SaveBankCommand implements Command {
     public void execute() {
         bankService.save();
     }
+
+    @Override
+    public String describe() {
+        return "Save bank to the json file.";
+    }
 }

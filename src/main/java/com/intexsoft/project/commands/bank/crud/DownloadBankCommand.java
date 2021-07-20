@@ -19,4 +19,9 @@ public class DownloadBankCommand implements Command {
     public void execute() {
         bankService.download();
     }
+
+    @Override
+    public String describe() {
+        return "Download all banks from json file.";
+    }
 }

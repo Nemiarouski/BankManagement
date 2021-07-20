@@ -44,4 +44,9 @@ public class CreateClientCommand implements Command {
 
         clientService.createClient(clientName, clientType);
     }
+
+    @Override
+    public String describe() {
+        return "Create new client and add him to client system.";
+    }
 }

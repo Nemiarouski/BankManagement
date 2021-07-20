@@ -39,4 +39,9 @@ public class UpdateBankCommand implements Command {
 
         bankService.updateBank(choice, bankName, legalRate, individualRate);
     }
+
+    @Override
+    public String describe() {
+        return "Update some bank information.";
+    }
 }

@@ -2,10 +2,11 @@ package com.intexsoft.project.application;
 
 import com.intexsoft.project.commands.Command;
 import com.intexsoft.project.commands.ExitCommand;
+import com.intexsoft.project.commands.HelpCommand;
 import com.intexsoft.project.commands.bank.crud.BankCrudCommand;
 import com.intexsoft.project.commands.bank.menu.BankMenuCommand;
-import com.intexsoft.project.commands.client.crud.ClientCrudCommands;
-import com.intexsoft.project.commands.client.menu.ClientMenuCommands;
+import com.intexsoft.project.commands.client.crud.ClientCrudCommand;
+import com.intexsoft.project.commands.client.menu.ClientMenuCommand;
 import com.intexsoft.project.manager.Manager;
 import com.intexsoft.project.repositories.BankRepository;
 import com.intexsoft.project.repositories.ClientRepository;
@@ -37,9 +38,10 @@ public class Menu {
 
     private void fillMenuCommands() {
         addCommand(menuCommands, new BankCrudCommand(commandHelper, bankService));
-        addCommand(menuCommands, new ClientCrudCommands(commandHelper, clientService));
+        addCommand(menuCommands, new ClientCrudCommand(commandHelper, clientService));
         addCommand(menuCommands, new BankMenuCommand(commandHelper, clientService, bankService));
-        addCommand(menuCommands, new ClientMenuCommands(commandHelper, bankService, clientService));
+        addCommand(menuCommands, new ClientMenuCommand(commandHelper, bankService, clientService));
+        addCommand(menuCommands, new HelpCommand(commandHelper, clientService, bankService));
         addCommand(menuCommands, new ExitCommand());
     }
 

@@ -60,4 +60,9 @@ public class ClientTransactionsCommand implements Command {
         }*/
         System.out.println("Function in progress...");
     }
+
+    @Override
+    public String describe() {
+        return "Show all transactions from special client.";
+    }
 }

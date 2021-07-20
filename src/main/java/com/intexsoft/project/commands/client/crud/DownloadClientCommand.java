@@ -19,4 +19,9 @@ public class DownloadClientCommand implements Command {
     public void execute() {
         clientService.download();
     }
+
+    @Override
+    public String describe() {
+        return "Download all clients from json file.";
+    }
 }

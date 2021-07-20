@@ -35,4 +35,9 @@ public class DeleteBankCommand implements Command {
 
         bankService.deleteEntity(bank);
     }
+
+    @Override
+    public String describe() {
+        return "Delete bank from bank system.";
+    }
 }

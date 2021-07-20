@@ -35,4 +35,9 @@ public class DeleteClientCommand implements Command {
 
         clientService.deleteEntity(client);
     }
+
+    @Override
+    public String describe() {
+        return "Delete client from client system.";
+    }
 }
