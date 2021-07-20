@@ -3,20 +3,20 @@ package com.intexsoft.project.commands.client.crud;
 import com.intexsoft.project.commands.Command;
 import com.intexsoft.project.entities.ClientType;
 import com.intexsoft.project.services.ClientService;
-import com.intexsoft.project.utils.ConsoleHelper;
+import com.intexsoft.project.utils.CommandHelper;
 import java.util.List;
 
 public class CreateClientCommand implements Command {
-    private final ConsoleHelper consoleHelper;
+    private final CommandHelper commandHelper;
     private final ClientService clientService;
 
-    public CreateClientCommand(ConsoleHelper consoleHelper, ClientService clientService) {
-        this.consoleHelper = consoleHelper;
+    public CreateClientCommand(CommandHelper commandHelper, ClientService clientService) {
+        this.commandHelper = commandHelper;
         this.clientService = clientService;
     }
 
     private ClientType getClientType(List<ClientType> clients) {
-        int choice = consoleHelper.validateIntToValue(clients.size());
+        int choice = commandHelper.validateIntToValue(clients.size());
         return clients.get(choice - 1);
     }
 
@@ -27,21 +27,26 @@ public class CreateClientCommand implements Command {
     }
 
     @Override
-    public String name() {
+    public String getName() {
         return "Create Client";
     }
 
     @Override
     public void execute() {
         System.out.println("Input client name:");
-        String name = consoleHelper.read();
+        String clientName = commandHelper.read();
 
-        List<ClientType> clients = List.of(ClientType.values());
-        showClientTypes(clients);
+        List<ClientType> clientTypes = List.of(ClientType.values());
+        showClientTypes(clientTypes);
 
         System.out.println("Choose client type:");
-        ClientType clientType = getClientType(clients);
+        ClientType clientType = getClientType(clientTypes);
 
-        clientService.createClient(name, clientType);
+        clientService.createClient(clientName, clientType);
+    }
+
+    @Override
+    public String describe() {
+        return "Create new client and add him to client system.";
     }
 }

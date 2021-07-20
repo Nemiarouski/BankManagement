@@ -11,12 +11,17 @@ public class SaveBankCommand implements Command {
     }
 
     @Override
-    public String name() {
+    public String getName() {
         return "Save Bank";
     }
 
     @Override
     public void execute() {
         bankService.save();
+    }
+
+    @Override
+    public String describe() {
+        return "Save bank to the json file.";
     }
 }

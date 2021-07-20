@@ -11,12 +11,17 @@ public class DownloadClientCommand implements Command {
     }
 
     @Override
-    public String name() {
+    public String getName() {
         return "Download Client";
     }
 
     @Override
     public void execute() {
         clientService.download();
+    }
+
+    @Override
+    public String describe() {
+        return "Download all clients from json file.";
     }
 }

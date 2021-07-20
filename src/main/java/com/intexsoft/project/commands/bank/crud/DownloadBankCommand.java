@@ -11,12 +11,17 @@ public class DownloadBankCommand implements Command {
     }
 
     @Override
-    public String name() {
+    public String getName() {
         return "Download Bank";
     }
 
     @Override
     public void execute() {
         bankService.download();
+    }
+
+    @Override
+    public String describe() {
+        return "Download all banks from json file.";
     }
 }

@@ -4,15 +4,15 @@ import com.intexsoft.project.commands.Command;
 import com.intexsoft.project.entities.Client;
 import com.intexsoft.project.entities.ClientType;
 import com.intexsoft.project.services.ClientService;
-import com.intexsoft.project.utils.ConsoleHelper;
+import com.intexsoft.project.utils.CommandHelper;
 import java.util.List;
 
 public class UpdateClientCommand implements Command {
-    private final ConsoleHelper consoleHelper;
+    private final CommandHelper commandHelper;
     private final ClientService clientService;
 
-    public UpdateClientCommand(ConsoleHelper consoleHelper, ClientService clientService) {
-        this.consoleHelper = consoleHelper;
+    public UpdateClientCommand(CommandHelper commandHelper, ClientService clientService) {
+        this.commandHelper = commandHelper;
         this.clientService = clientService;
     }
 
@@ -23,25 +23,25 @@ public class UpdateClientCommand implements Command {
     }
 
     private ClientType getClientType(List<ClientType> clients) {
-        int choice = consoleHelper.validateIntToValue(clients.size());
+        int choice = commandHelper.validateIntToValue(clients.size());
         return clients.get(choice - 1);
     }
 
     @Override
-    public String name() {
+    public String getName() {
         return "Update Client";
     }
 
     @Override
     public void execute() {
         List<Client> clients = clientService.getEntities();
-        consoleHelper.show(clients);
+        commandHelper.show(clients);
 
         System.out.println("Choose client to update:");
-        int choice = consoleHelper.validateIntToValue(clients.size());
+        int choice = commandHelper.validateIntToValue(clients.size());
 
         System.out.println("Input new client name:");
-        String name = consoleHelper.read();
+        String name = commandHelper.read();
 
         List<ClientType> clientTypes = List.of(ClientType.values());
         showClientTypes(clientTypes);
@@ -50,5 +50,10 @@ public class UpdateClientCommand implements Command {
         ClientType clientType = getClientType(clientTypes);
 
         clientService.updateClient(choice, name, clientType);
+    }
+
+    @Override
+    public String describe() {
+        return "Update some information about clients.";
     }
 }

@@ -11,12 +11,17 @@ public class SaveClientCommand implements Command {
     }
 
     @Override
-    public String name() {
+    public String getName() {
         return "Save Clients";
     }
 
     @Override
     public void execute() {
         clientService.save();
+    }
+
+    @Override
+    public String describe() {
+        return "Save all clients in json file.";
     }
 }
